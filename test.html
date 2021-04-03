@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head><h1>Students Data</h1> </head>
+
+<body>
+
+Student Name : <input type="text" id="name"><br>
+Student Age : <input type="text" id="age"><br>
+
+<button onclick="addTop()">Add at Top</button>
+<button onclick="addBottom()">Add at Bottom</button>
+
+<h1> Students Details Table </h1>
+
+<div id="studentsData">
+
+
+</div>
+
+<script>
+
+var students = []
+
+function addBottom()
+{
+	var name = document.getElementById("name");
+	var age = document.getElementById("age");
+	
+	var student = new Object();
+	student.Name = name.value;
+	student.Age = age.value;
+	
+	students.push(student);
+	resetAll();
+}
+
+function addTop()
+{
+	var name = document.getElementById("name");
+	var age = document.getElementById("age");
+	
+	var student = new Object();
+	student.Name = name.value;
+	student.Age = age.value;
+	
+	students.unshift(student);
+	resetAll();
+}
+
+function resetAll()
+{
+	document.getElementById("name").value="";
+	document.getElementById("age").value="";		
+	
+	updateTable();
+	
+
+	console.log(students);
+	
+}
+
+function updateTable()
+{
+	var myTableDiv = document.getElementById("studentsData")
+	
+    var table = document.createElement('TABLE')
+    var tableBody = document.createElement('TBODY')
+
+    table.border = '1'
+    table.appendChild(tableBody);
+	
+	//TABLE COLUMNS
+    var tr = document.createElement('TR');
+    tableBody.appendChild(tr);
+    
+    var th = document.createElement('TH')
+    th.appendChild(document.createTextNode("S.No"));
+    tr.appendChild(th);
+    
+    var th1 = document.createElement('TH')
+    th1.appendChild(document.createTextNode("Name"));
+    tr.appendChild(th1);
+    
+    var th2 = document.createElement('TH')
+    th2.appendChild(document.createTextNode("Age"));
+    tr.appendChild(th2);
+    
+    for(i=0;i<students.length;i++)
+    {
+    	var row = document.createElement('TR');
+    	
+    	var td = document.createElement('TD');
+    	td.appendChild(document.createTextNode(i+1));
+    	row.appendChild(td)
+    	
+    	var td = document.createElement('TD');
+    	td.appendChild(document.createTextNode(students[i].Name));
+    	row.appendChild(td)
+    	
+    	var td = document.createElement('TD');
+    	td.appendChild(document.createTextNode(students[i].Age));
+    	row.appendChild(td)
+    	
+    	tableBody.appendChild(row);
+    }
+    
+	myTableDiv.innerHTML="";
+    myTableDiv.appendChild(table);
+    
+}
+
+
+
+</script>
+
+</body>
+
+
+
+</html>

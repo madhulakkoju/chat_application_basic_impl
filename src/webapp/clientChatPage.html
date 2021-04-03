@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>HELP CHAT</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body >
+
+<div class ="helpChatBox" style ="width:5000px;height:300px">
+<div class = "User Data" style ="background-color:black;color:white;padding:10px;text-align:center;" >
+<h1>Help Chat</h1>
+</div>
+
+<div class = "Chat" id="Chat" style ="overflow:hidden;padding:5px;text-align:center;height:200px;overflow-y:scroll;">
+<table id = "showChat" >
+
+</table>
+</div>
+
+<div class="Inputs">
+<input type="text" id="text" style ="width:250px;height:20px">
+<button id="send" value="send" style ="width:50px;height:25px" onClick="sendMessage()" >SEND</button>
+</div>
+
+</div>
+
+<script>
+
+var messages =["abc","dfsdf","sdsdf","sfsdf","ffsfsd","dfsdfsdf","sdfgsdfsdf","dfSDfsd","dfsdssd ","fdfsdg"]
+
+var senderEmail ="Madhu@gmail.com";
+
+buildChat();
+
+
+function buildChat()
+{
+	var table = document.getElementById("showChat");
+	
+	for(i=0;i<messages.length;i++)
+	{
+		var tr=document.createElement('TR');
+		var td = document.createElement('TD')
+		td.appendChild(document.createTextNode(messages[i]))
+		tr.appendChild(td)
+		table.appendChild(tr);
+	}
+	scrollDown();
+}
+
+
+function updateChat(message)
+{
+	var table = document.getElementById("showChat");
+	
+	var tr=document.createElement('TR');
+	var td = document.createElement('TD')
+	td.appendChild(document.createTextNode(message.Sender))
+	tr.appendChild(td)
+	
+	td = document.createElement('TD')
+	td.appendChild(document.createTextNode(message.MessageBody))
+	tr.appendChild(td)
+	
+	table.appendChild(tr);
+	
+	scrollDown();
+}
+	
+
+
+function sendMessage()
+{
+	msg = new Object();
+	msg.Sender = senderEmail;
+	msg.MessageBody = document.getElementById("text").value;
+	msg.dt = new Date();
+	document.getElementById("text").value="";
+	
+	messages.push(msg);
+	// send the msg object to json to server for addition of the Data to database
+	
+	
+	
+	updateChat(msg);
+}
+
+function scrollDown()
+{
+	var objDiv = document.getElementById("Chat");
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+</script>
+
+
+
+
+</body>
+</html>
